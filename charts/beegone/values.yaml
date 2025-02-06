@@ -1,0 +1,12 @@
+nameOverride: ""
+fullnameOverride: ""
+
+ingress:
+  enabled: true
+  host: ""
+
+replicas: 1
+image:
+  registry: "ghcr.io/tortoaster"
+  name: "beegone"
+  tag: "v1.0.0"

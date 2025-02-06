@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "beegone.fullname" . }}
+  labels:
+    {{- include "beegone.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      {{- include "beegone.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "beegone.labels" . | nindent 8 }}
+    spec:
+      containers:
+        {{- with .Values.image }}
+        - image: "{{ .registry }}/{{ .name }}:{{ .tag }}"
+        {{- end }}
+          name: {{ .Chart.Name }}
+          ports:
+            - containerPort: 8000
