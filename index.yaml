@@ -1,0 +1,26 @@
+apiVersion: v1
+entries:
+  beegone:
+  - apiVersion: v2
+    appVersion: v1.0.0
+    created: "2025-02-06T21:18:25.362173261Z"
+    description: A chess-like game themed around bees
+    digest: c820a8df358cbb662e6ba67409ee00a595d0a60d9de11d61eb6451e52cc5c83f
+    home: https://beegone.tortoaster.com
+    keywords:
+    - chess
+    - game
+    - rust
+    - svelte
+    - wasm
+    maintainers:
+    - email: rick@tortoaster.com
+      name: Rick van der Wal
+      url: https://tortoaster.com
+    name: beegone
+    sources:
+    - https://github.com/Tortoaster/beegone
+    urls:
+    - https://github.com/Tortoaster/charts/releases/download/beegone-1.0.0/beegone-1.0.0.tgz
+    version: 1.0.0
+generated: "2025-02-06T21:18:25.3621782Z"
