@@ -23,4 +23,21 @@ entries:
     urls:
     - https://github.com/Tortoaster/charts/releases/download/beegone-1.0.0/beegone-1.0.0.tgz
     version: 1.0.0
-generated: "2025-02-06T21:18:25.3621782Z"
+  tortoaster:
+  - apiVersion: v2
+    appVersion: v1.0.0
+    created: "2025-02-07T21:45:37.736640939Z"
+    description: My personal website!
+    digest: 76e0d1c3e09c408e3a4544cbd27c2b5392e3290dcfc45255575de8cd2ae472d5
+    home: https://tortoaster.com
+    maintainers:
+    - email: rick@tortoaster.com
+      name: Rick van der Wal
+      url: https://tortoaster.com
+    name: tortoaster
+    sources:
+    - https://github.com/Tortoaster/tortoaster
+    urls:
+    - https://github.com/Tortoaster/charts/releases/download/tortoaster-1.0.0/tortoaster-1.0.0.tgz
+    version: 1.0.0
+generated: "2025-02-07T21:45:37.736650286Z"
