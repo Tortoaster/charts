@@ -25,6 +25,22 @@ entries:
     version: 1.0.0
   tortoaster:
   - apiVersion: v2
+    appVersion: v1.1.0
+    created: "2025-02-07T23:07:35.588588979Z"
+    description: My personal website!
+    digest: d512a28d29942710394bf8756962c7a32a4986b6828d48aea3afe977ebf55d2d
+    home: https://tortoaster.com
+    maintainers:
+    - email: rick@tortoaster.com
+      name: Rick van der Wal
+      url: https://tortoaster.com
+    name: tortoaster
+    sources:
+    - https://github.com/Tortoaster/tortoaster
+    urls:
+    - https://github.com/Tortoaster/charts/releases/download/tortoaster-1.1.0/tortoaster-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
     appVersion: v1.0.0
     created: "2025-02-07T21:45:37.736640939Z"
     description: My personal website!
@@ -40,4 +56,4 @@ entries:
     urls:
     - https://github.com/Tortoaster/charts/releases/download/tortoaster-1.0.0/tortoaster-1.0.0.tgz
     version: 1.0.0
-generated: "2025-02-07T21:45:37.736650286Z"
+generated: "2025-02-07T23:07:35.588601903Z"
