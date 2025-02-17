@@ -1,0 +1,96 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "toast.fullname" . }}
+  labels:
+    {{- include "toast.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.deploy.replicas }}
+  selector:
+    matchLabels:
+      {{- include "toast.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "toast.labels" . | nindent 8 }}
+    spec:
+      initContainers:
+        - name: "sqlx-migrator"
+          {{- with .Values.sqlxMigrator.image}}
+          image: "{{ .registry }}/{{ .name }}:{{ .tag }}"
+          {{- end }}
+          env:
+            {{- with .Values.sqlxMigrator }}
+            - name: "REPO"
+              value: {{ .repo }}
+            - name: "REV"
+              value: {{ .rev }}
+            - name: "MIGRATIONS_DIR"
+              value: {{ .migrationsDir }}
+            - name: "TARGET_VERSION"
+              value: {{ .targetVersion }}
+            {{- end }}
+            {{- with .Values.db }}
+            - name: "DB_USER"
+              value: {{ .admin.name }}
+            - name: "DB_PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .admin.passwordSecret.name | required "db.admin.passwordSecret.name required" }}
+                  key: {{ .admin.passwordSecret.key | required "db.admin.passwordSecret.key required" }}
+            - name: "DB_HOST"
+              value: {{ .host | required "db.host required" }}
+            - name: "DB_PORT"
+              value: {{ .port | quote }}
+            - name: "DB_DATABASE"
+              value: {{ .database | required "db.database required" }}
+            {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.deploy.image}}
+          image: "{{ .registry }}/{{ .name }}:{{ .tag }}"
+          {{- end }}
+          ports:
+            - containerPort: {{ .Values.deploy.containerPort }}
+          env:
+            - name: "HOST"
+              value: "0.0.0.0"
+            - name: "PORT"
+              value: {{ .Values.deploy.containerPort | quote }}
+            - name: "RUST_LOG"
+              value: {{ .Values.deploy.logLevel }}
+            {{- with .Values.db }}
+            - name: "DATABASE__URL"
+              value: {{ printf "postgresql://%s@%s:%d/%s" (.user.name | required "db.user.name required") (.host | required "db.host required") .port (.database | required "db.database required") }}
+            - name: "DATABASE__PASSWORD"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .user.passwordSecret.name | required "db.user.passwordSecret.name required" }}
+                  key: {{ .user.passwordSecret.key | required "db.user.passwordSecret.key required" }}
+            {{- end }}
+            {{- with .Values.s3 }}
+            - name: "S3__REGION"
+              value: {{ .region | required "s3.region required" }}
+            - name: "S3__ENDPOINT_URL"
+              value: {{ .endpointUrl | required "s3.endpointUrl required" }}
+            - name: "S3__ACCESS_KEY_ID"
+              value: {{ .accessKeyId | required "s3.accessKeyId required" }}
+            - name: "S3__SECRET_ACCESS_KEY"
+              valueFrom:
+                secretKeyRef:
+                  key: {{ .secret.name | required "s3.secret.name required" }}
+                  name: {{ .secret.key | required "s3.secret.key required" }}
+            {{- end }}
+            {{- with .Values.oidc }}
+            - name: "OIDC__CLIENT_ID"
+              value: {{ .clientId | required "oidc.clientId required" }}
+            - name: "OIDC__CLIENT_SECRET"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .secret.key | required "oidc.secret.key required" }}
+                  key: {{ .secret.name | required "oidc.secret.name required" }}
+            - name: "OIDC__ISSUER_URL"
+              value: {{ .issuerUrl | required "oidc.issuerUrl required" }}
+            - name: "OIDC__REDIRECT_URL"
+              value: {{ .redirectUrl | required "oidc.redirectUrl required" }}
+            {{- end }}

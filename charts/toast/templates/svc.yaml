@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "toast.fullname" . }}
+  labels:
+      {{- include "toast.labels" . | nindent 4 }}
+spec:
+  ports:
+    - port: 80
+      targetPort: {{ .Values.deploy.containerPort }}
+  selector:
+    {{- include "toast.selectorLabels" . | nindent 4 }}

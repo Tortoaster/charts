@@ -1,0 +1,24 @@
+{{ if .Values.ingress.enabled -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "toast.fullname" . }}
+  labels:
+    {{- include "toast.labels" . | nindent 4 }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.host | required "ingress.host required" }}
+      http:
+        paths:
+          - backend:
+              service:
+                name: {{ include "toast.fullname" . }}
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host | required "ingress.host required" }}
+      secretName: {{ include "toast.fullname" $ }}
+{{- end }}
