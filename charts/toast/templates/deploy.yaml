@@ -80,6 +80,8 @@ spec:
                 secretKeyRef:
                   key: {{ .secret.name | required "s3.secret.name required" }}
                   name: {{ .secret.key | required "s3.secret.key required" }}
+            - name: "S3__BUCKET_NAME"
+              value: {{ .bucketName }}
             {{- end }}
             {{- with .Values.oidc }}
             - name: "OIDC__CLIENT_ID"

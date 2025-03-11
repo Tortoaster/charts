@@ -61,6 +61,7 @@ s3:
     name: ""
     # key of the secret that corresponds to the S3 secret access key
     key: ""
+  bucketName: "toast"
 
 oidc:
   clientId: ""
