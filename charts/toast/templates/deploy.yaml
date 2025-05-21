@@ -31,14 +31,8 @@ spec:
               value: {{ .targetVersion }}
             {{- end }}
             {{- with .Values.db }}
-            - name: "DB_USER"
-              value: {{ .username }}
-            - name: "DB_HOST"
-              value: {{ .host | required "db.host required" }}
-            - name: "DB_PORT"
-              value: {{ .port | quote }}
-            - name: "DB_DATABASE"
-              value: {{ .database | required "db.database required" }}
+            - name: "DATABASE_URL"
+              value: {{ .url | required "db.url required" }}
             {{- end }}
       containers:
         - name: {{ .Chart.Name }}
@@ -56,5 +50,5 @@ spec:
               value: {{ .Values.deploy.logLevel }}
             {{- with .Values.db }}
             - name: "DATABASE__URL"
-              value: {{ printf "postgresql://%s@%s:%d/%s" (.username | required "db.user.name required") (.host | required "db.host required") .port (.database | required "db.database required") }}
+              value: {{ .url | required "db.url required" }}
             {{- end }}

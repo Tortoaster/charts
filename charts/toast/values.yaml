@@ -13,11 +13,11 @@ sqlxMigrator:
   # directory within the repository that contains the migrations
   migrationsDir: "migrations"
   # version of the most recent migration that is compatible with this version of the application - note that this is always a number like 20250207222531, but be sure to put it between quotes to prevent YAML from converting it to scientific notation
-  targetVersion: "20240513174947"
+  targetVersion: "20240215153403"
   image:
     registry: "ghcr.io/tortoaster"
     name: "sqlx-migrator"
-    tag: "v1.0.0"
+    tag: "v2.0.0"
 
 deploy:
   replicas: 1
@@ -29,11 +29,4 @@ deploy:
     tag: "v1.4.0"
 
 db:
-  # name of the database user
-  username: ""
-  # host that serves the database
-  host: ""
-  # port the database listens to
-  port: 5432
-  # database name
-  database: ""
+  url: ""
