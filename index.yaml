@@ -26,6 +26,22 @@ entries:
   toast:
   - apiVersion: v2
     appVersion: v1.4.0
+    created: "2025-05-21T13:42:08.901254449Z"
+    description: A blogging application to write about my hobby projects
+    digest: 76b9c65c3a2c7b4f452635cd7d9213daa1fdd344d6028265107491975900946f
+    home: https://tortoaster.com
+    maintainers:
+    - email: rick@tortoaster.com
+      name: Rick van der Wal
+      url: https://tortoaster.com
+    name: toast
+    sources:
+    - https://github.com/Tortoaster/toast
+    urls:
+    - https://github.com/Tortoaster/charts/releases/download/toast-1.2.1/toast-1.2.1.tgz
+    version: 1.2.1
+  - apiVersion: v2
+    appVersion: v1.4.0
     created: "2025-05-21T13:17:30.631200362Z"
     description: A blogging application to write about my hobby projects
     digest: 1e2eb45a83e61236ed400caa54caeaef848c5de1a1d071c90039bc37d5896249
@@ -121,4 +137,4 @@ entries:
     urls:
     - https://github.com/Tortoaster/charts/releases/download/tortoaster-1.0.0/tortoaster-1.0.0.tgz
     version: 1.0.0
-generated: "2025-05-21T13:17:30.631217414Z"
+generated: "2025-05-21T13:42:08.901283654Z"
