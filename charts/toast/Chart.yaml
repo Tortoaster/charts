@@ -1,6 +1,6 @@
 apiVersion: "v2"
 name: "toast"
-version: "1.1.0"
+version: "1.2.0"
 description: "A blogging application to write about my hobby projects"
 home: "https://tortoaster.com"
 sources:
@@ -9,4 +9,4 @@ maintainers:
   - name: "Rick van der Wal"
     email: "rick@tortoaster.com"
     url: "https://tortoaster.com"
-appVersion: "v1.3.0"
+appVersion: "v1.4.0"
